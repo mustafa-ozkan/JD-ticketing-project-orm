@@ -4,6 +4,8 @@ import com.cybertek.dto.ProjectDTO;
 import com.cybertek.dto.TaskDTO;
 import com.cybertek.dto.UserDTO;
 import com.cybertek.enums.Status;
+import com.cybertek.service.ProjectService;
+import com.cybertek.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,23 +20,25 @@ import java.util.stream.Collectors;
 @Controller
 @RequestMapping("/project")
 public class ProjectController {
-//
-//    @Autowired
-//    ProjectService projectService;
-//    @Autowired
-//    UserService userService;
-//    @Autowired
-//    TaskService taskService;
-//
-//    @GetMapping("/create")
-//    public String createProject(Model model){
-//
-//        model.addAttribute("project",new ProjectDTO());
-//        model.addAttribute("projects",projectService.findAll());
-//        model.addAttribute("managers",userService.findManagers());
-//
-//        return "/project/create";
-//    }
+
+
+    ProjectService projectService;
+    UserService userService;
+
+    public ProjectController(ProjectService projectService, UserService userService) {
+        this.projectService = projectService;
+        this.userService = userService;
+    }
+
+    @GetMapping("/create")
+    public String createProject(Model model){
+
+        model.addAttribute("project",new ProjectDTO());
+        model.addAttribute("projects",projectService.listAllProjects());
+        model.addAttribute("managers",userService.listAllByRole("manager"));
+
+        return "/project/create";
+    }
 //
 //    @PostMapping("/create")
 //    public String insertProject(ProjectDTO project){
