@@ -27,9 +27,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserDTO> listAllUsers() {
         List<User> list = userRepository.findAll(Sort.by("firstName"));
-        return list.stream().map(obj -> {
-            return userMapper.convertToDto(obj);
-        }).collect(Collectors.toList());
+        return list.stream().map(obj ->{return userMapper.convertToDto(obj);}).collect(Collectors.toList());
     }
 
     @Override
@@ -40,7 +38,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void save(UserDTO dto) {
-        User obj = userMapper.convertToEntity(dto);
+        User obj =  userMapper.convertToEntity(dto);
         userRepository.save(obj);
     }
 
@@ -59,9 +57,15 @@ public class UserServiceImpl implements UserService {
         return findByUserName(dto.getUserName());
     }
 
-    //Hard delete
     @Override
     public void delete(String username) {
+        User user = userRepository.findByUserName(username);
+        user.setIsDeleted(true);
+        userRepository.save(user);
+    }
+
+    //hard delete
+    public void deleteByUserName(String username) {
         userRepository.deleteByUserName(username);
     }
 }
