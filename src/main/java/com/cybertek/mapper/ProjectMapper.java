@@ -4,7 +4,9 @@ import com.cybertek.dto.ProjectDTO;
 import com.cybertek.entity.Project;
 import com.cybertek.repository.ProjectRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ProjectMapper {
 
     private ModelMapper modelMapper;
@@ -15,12 +17,12 @@ public class ProjectMapper {
         this.projectRepository = projectRepository;
     }
 
-    public Project convertToEntity(ProjectDTO projectDTO){
+    public Project convertToEntity(ProjectDTO projectDTO) {
 
-        return modelMapper.map(projectDTO,Project.class);
+        return modelMapper.map(projectDTO, Project.class);
     }
 
-    public ProjectDTO convertToDto(Project projectEntity){
-        return modelMapper.map(projectEntity,ProjectDTO.class);
+    public ProjectDTO convertToDto(Project projectEntity) {
+        return modelMapper.map(projectEntity, ProjectDTO.class);
     }
 }

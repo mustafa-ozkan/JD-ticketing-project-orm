@@ -4,5 +4,7 @@ VALUES ('2021-01-05 00:00:00', 1, false, '2021-01-05 00:00:00', 1, 'Admin'),
        ('2021-01-05 00:00:00', 1, false, '2021-01-05 00:00:00', 1, 'Employee');
 insert into users(insert_date_time, insert_user_id, is_deleted, last_update_date_time, last_update_user_id, enabled,
                   first_name, gender, last_name, user_name, role_id)
-values ('2021-01-05 00:00:00', 1, false, '2021-01-05 00:00:00', 1, true, 'admin', 'Male', 'admin', 'admin@admin.com',
+values ('2021-01-05 00:00:00', 1, false, '2021-01-05 00:00:00', 1, true, 'admin', 'MALE', 'admin', 'admin@admin.com',
+        1);
+values ('2021-01-05 00:00:00', 1, false, '2021-01-05 00:00:00', 1, true, 'manager', 'MALE', 'manager', 'mana@ger.com',
         1);
