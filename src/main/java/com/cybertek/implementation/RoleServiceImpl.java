@@ -32,7 +32,7 @@ public class RoleServiceImpl implements RoleService {
 
 
 
-        return listRoles.stream().map(obj->{return roleMapper.convertToDto(obj);}).collect(Collectors.toList());
+        return listRoles.stream().map(roleMapper::convertToDto).collect(Collectors.toList());
     }
 
     @Override
