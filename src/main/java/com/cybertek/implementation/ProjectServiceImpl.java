@@ -19,12 +19,10 @@ public class ProjectServiceImpl implements ProjectService {
 
     private ProjectMapper projectMapper;
     private ProjectRepository projectRepository;
-    private UserMapper userMapper;
 
-    public ProjectServiceImpl(ProjectMapper projectMapper, ProjectRepository projectRepository, UserMapper userMapper) {
+    public ProjectServiceImpl(ProjectMapper projectMapper, ProjectRepository projectRepository) {
         this.projectMapper = projectMapper;
         this.projectRepository = projectRepository;
-        this.userMapper = userMapper;
     }
 
     @Override
