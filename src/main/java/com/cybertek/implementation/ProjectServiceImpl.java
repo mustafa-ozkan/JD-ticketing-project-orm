@@ -35,13 +35,13 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public List<ProjectDTO> listAllProjects() {
         List<Project> list = projectRepository.findAll(Sort.by("projectCode"));
-        return list.stream().map(obj ->{return projectMapper.convertToDto(obj);}).collect(Collectors.toList());
+        return list.stream().map(obj -> projectMapper.convertToDto(obj)).collect(Collectors.toList());
     }
 
     @Override
     public void save(ProjectDTO projectDTO) {
         projectDTO.setProjectStatus(Status.OPEN);
-        Project project= projectMapper.convertToEntity(projectDTO);
+        Project project = projectMapper.convertToEntity(projectDTO);
         project.setAssignedManager(userMapper.convertToEntity(projectDTO.getAssignedManager()));
         projectRepository.save(project);
     }
