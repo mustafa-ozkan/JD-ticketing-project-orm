@@ -81,21 +81,28 @@ public class TaskController {
     }
 
     @GetMapping("/employee")
-    public String edit(Model model){
+    public String edit(Model model) {
         //first of all i need to take all taskDto
         List<TaskDTO> taskDTOList = taskService.listAllTasksByStatusIsNot(Status.COMPLETE);
-        model.addAttribute("tasks",taskDTOList);
+        model.addAttribute("tasks", taskDTOList);
 
         return "task/employee-tasks";
 
     }
 
     @GetMapping("/employee/edit/{id}")
-    public String employee_update(@PathVariable("id") Long id, Model model){
+    public String employee_update(@PathVariable("id") Long id, Model model) {
         TaskDTO taskDTO = taskService.findById(id);
 
-        List<TaskDTO> taskDTOList = taskService.lis
+        List<TaskDTO> taskDTOList = taskService.listAllTasksByProjectManager();
 
+        model.addAttribute("task", taskDTO);
+        model.addAttribute("users", userService.listAllByRole("employee"));
+        model.addAttribute("projects", projectService.listAllProjects());
+        model.addAttribute("tasks",taskDTOList);
+        model.addAttribute("statuses",Status.values());
+
+        return "task/employee-update";
 
 
     }

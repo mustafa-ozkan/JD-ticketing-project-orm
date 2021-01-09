@@ -10,7 +10,6 @@ import com.cybertek.mapper.TaskMapper;
 import com.cybertek.repository.TaskRepository;
 import com.cybertek.repository.UserRepository;
 import com.cybertek.service.TaskService;
-import org.springframework.core.task.TaskRejectedException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -128,7 +127,12 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public List<TaskDTO> listAllTasksByProjectManager() {
+
         User user = userRepository.findByUserName("xihyv");
-        List<Task> taskList =taskRepository.findAllByProjectByAssignedManager(user);
+
+        List<Task> taskList = taskRepository.findAllByAssignedEmployee(user);
+
+
+        return taskList.stream().map(taskMapper::convertToDto).collect(Collectors.toList());
     }
 }
