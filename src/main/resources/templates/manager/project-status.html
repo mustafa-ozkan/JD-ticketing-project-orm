@@ -78,7 +78,7 @@
                                                 <td th:text="${project.assignedManager.firstName + ' ' + project.assignedManager.lastName}"></td>
                                                 <td th:text="${project.unfinishedTaskCounts + '/' + project.completeTaskCounts}"></td>
                                                 <td th:text="${project.projectStatus}"></td>
-                                                <td><a class="btn btn-info rounded-0">Complete</a></td>
+                                                <td ><a th:href="@{/project/complete/{id}(id=${project.getProjectCode()})}" class="btn btn-info rounded-0">Complete</a></td>
                                             </tr>
                                             </tbody>
                                         </table>
