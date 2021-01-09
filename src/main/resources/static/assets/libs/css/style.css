@@ -6972,6 +6972,16 @@ Media Query
     padding: 17px 29px;}
 }
 
+/*
+----disabled button made by Ozzy
+ */
+.disabled-button {
+    background: background: #cdcdcd;
+    color: black;
+    border-color: #cdcdcd;
+    cursor: not-allowed !important;
+}
+
 
  
  
