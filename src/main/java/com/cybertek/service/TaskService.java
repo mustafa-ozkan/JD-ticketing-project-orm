@@ -20,5 +20,6 @@ public interface TaskService {
     void deleteByProject(ProjectDTO projectDTO);
     List<TaskDTO> listAllTaskByProject(ProjectDTO projectDTO);
     List<TaskDTO> listAllTasksByStatusIsNot(Status taskStatus);
+    List<TaskDTO> listAllTasksByProjectManager();
 
 }

@@ -90,5 +90,15 @@ public class TaskController {
 
     }
 
+    @GetMapping("/employee/edit/{id}")
+    public String employee_update(@PathVariable("id") Long id, Model model){
+        TaskDTO taskDTO = taskService.findById(id);
+
+        List<TaskDTO> taskDTOList = taskService.lis
+
+
+
+    }
+
 
 }
