@@ -1,6 +1,7 @@
 package com.cybertek.implementation;
 
 import com.cybertek.dto.ProjectDTO;
+import com.cybertek.dto.UserDTO;
 import com.cybertek.entity.Project;
 import com.cybertek.entity.User;
 import com.cybertek.enums.Status;
@@ -8,6 +9,7 @@ import com.cybertek.mapper.ProjectMapper;
 import com.cybertek.mapper.UserMapper;
 import com.cybertek.repository.ProjectRepository;
 import com.cybertek.service.ProjectService;
+import com.cybertek.service.UserService;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -19,10 +21,14 @@ public class ProjectServiceImpl implements ProjectService {
 
     private ProjectMapper projectMapper;
     private ProjectRepository projectRepository;
+    private UserService userService;
+    private UserMapper userMapper;
 
-    public ProjectServiceImpl(ProjectMapper projectMapper, ProjectRepository projectRepository) {
+    public ProjectServiceImpl(ProjectMapper projectMapper, ProjectRepository projectRepository, UserService userService, UserMapper userMapper) {
         this.projectMapper = projectMapper;
         this.projectRepository = projectRepository;
+        this.userService = userService;
+        this.userMapper = userMapper;
     }
 
     @Override
@@ -40,6 +46,19 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
+    public List<ProjectDTO> listAllProjectDetails() {
+        UserDTO currentUserDto = userService.findByUserName("mana@ger.com");
+        User user = userMapper.convertToEntity(currentUserDto);
+        List<Project> projectList = projectRepository.findAllByAssignedManager(user);
+
+        return projectList.stream().map(project -> {
+            ProjectDTO obj = projectMapper.convertToDto(project);
+            return obj;
+        }).collect(Collectors.toList());
+
+    }
+
+    @Override
     public void save(ProjectDTO projectDTO) {
         projectDTO.setProjectStatus(Status.OPEN);
         Project project = projectMapper.convertToEntity(projectDTO);
@@ -50,7 +69,7 @@ public class ProjectServiceImpl implements ProjectService {
     public void update(ProjectDTO projectDTO) {
         //get this one from the repository
         Project project = projectRepository.findByProjectCode(projectDTO.getProjectCode());
-      //convert to entity
+        //convert to entity
         Project convertedProject = projectMapper.convertToEntity(projectDTO);
         //set convertedproject id to current one(to keep the id)
         convertedProject.setId(project.getId());
