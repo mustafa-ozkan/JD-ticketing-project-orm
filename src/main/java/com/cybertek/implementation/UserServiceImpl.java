@@ -93,6 +93,8 @@ public class UserServiceImpl implements UserService {
             throw new TicketingProjectException("User Can not be deleted. User is linked by a project or a task");
 
         }
+
+        user.setUserName(user.getUserName() + "-" + user.getId());
         user.setIsDeleted(true);
         userRepository.save(user);
     }

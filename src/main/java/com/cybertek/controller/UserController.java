@@ -53,13 +53,13 @@ public class UserController {
         return "redirect:/user/create";
     }
 
+    /*
+    if try catch method is used for the exception it will not give an error page in the gui
+    so throw is used
+     */
     @GetMapping("/delete/{username}")
-    public String deleteUser(@PathVariable("username") String username){
-        try {
+    public String deleteUser(@PathVariable("username") String username) throws TicketingProjectException{
             userService.delete(username);
-        } catch (TicketingProjectException e) {
-            e.printStackTrace();
-        }
         return "redirect:/user/create";
     }
 

@@ -1,7 +1,7 @@
 package com.cybertek.exception;
 
-public class TicketingProjectException extends Throwable {
-    public TicketingProjectException(String s) {
-        System.out.println(s);
+public class TicketingProjectException extends Exception {
+    public TicketingProjectException(String message) {
+        super(message);
     }
 }
