@@ -77,6 +77,8 @@ public class TaskServiceImpl implements TaskService {
         }
     }
 
+
+
     @Override
     public void delete(Long taskId) {
         Optional<Task> foundTask = taskRepository.findById(taskId);
@@ -134,5 +136,14 @@ public class TaskServiceImpl implements TaskService {
 
 
         return taskList.stream().map(taskMapper::convertToDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public void updateTaskStatus(TaskDTO taskDTO) {
+        Optional<Task> foundTask = taskRepository.findById(taskDTO.getId());
+        if(foundTask.isPresent()){
+            foundTask.get().setTaskStatus(Status.COMPLETE);
+            taskRepository.save(foundTask.get());
+        }
     }
 }
