@@ -110,7 +110,19 @@ public class TaskController {
     @PostMapping("/employee/update/{id}")
     public String employee_update(@PathVariable("id") Long id, TaskDTO taskDTO){
         taskService.updateTaskStatus(taskDTO);
-        return "rewdirect:/task/employee";
+        return "redirect:/task/employee";
+    }
+
+    @GetMapping("/employee/archive")
+    public String employee_archive(Model model){
+        //Show me all the task dtos comes from taskservice
+        List<TaskDTO> taskDTOList = taskService.listAllTasksByStatus(Status.COMPLETE);
+
+        model.addAttribute("tasks",taskDTOList);
+
+        return "task/employee-archive";
+
+
     }
 
 
