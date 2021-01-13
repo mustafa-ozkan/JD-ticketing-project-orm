@@ -63,6 +63,14 @@ public class ProjectServiceImpl implements ProjectService {
 
     }
 
+
+    @Override
+    public List<ProjectDTO> readAllByManager(User manager) {
+
+        List<Project> projectList = projectRepository.findAllByAssignedManager(manager);
+        return projectList.stream().map(projectMapper::convertToDto).collect(Collectors.toList());
+    }
+
     @Override
     public void save(ProjectDTO projectDTO) {
         projectDTO.setProjectStatus(Status.OPEN);
